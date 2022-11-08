@@ -1,13 +1,19 @@
 import React from "react";
 import "./ToDoItem.css";
 
-export default function ToDoItem({task, id, handleDelete}) {
+export default function ToDoItem({
+  task,
+  id,
+  handleDelete,
+  updateTask,
+  handleComplete,
+}) {
   return (
-    <li className="listItem">
-      <input type="text" defaultValue={task.text} value={task.text}></input>
+    <li className={`listItem task${id} ${task.completed ? "complete" : ""}`}>
+      <input type="text" value={task.text}></input>
       <p>REAL TEXT: {task.text}</p>
-      <button>Update Text</button>
-      <button>Completed</button>
+      <button onClick={() => updateTask(id)}>Update Text</button>
+      <button onClick={() => handleComplete(id)}>Completed</button>
       <button onClick={() => handleDelete(id)}>Delete</button>
       <button>KEY = {id}</button>
     </li>
