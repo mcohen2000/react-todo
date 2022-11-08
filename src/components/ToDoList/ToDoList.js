@@ -10,9 +10,31 @@ export default function ToDoList() {
     text: "",
     id: taskList.length,
     key: taskList.length,
+    completed: false,
   };
-  // const updateTask = () => {
-  // };
+  const updateTask = (id) => {
+    const newList = [...taskList];
+    console.log("UPDATE TASK:", newList[id].text);
+    newList.forEach((item) => {
+      if (item.id === id) {
+        item.text = task.text;
+      }
+    });
+    setTaskList(newList);
+    document.getElementById("newTaskInput").value = "";
+  };
+  const handleComplete = (id) => {
+    const newList = [...taskList];
+    console.log("UPDATE TASK:", newList[id].text);
+    newList.forEach((item) => {
+      if (item.id === id) {
+        item.completed = !item.completed;
+      }
+    });
+    console.log("UPDATED TASK!!!!", newList);
+    setTaskList(newList);
+    
+  };
   const handleTask = (str) => {
     newTask.text = str;
     setTask(newTask);
@@ -30,17 +52,27 @@ export default function ToDoList() {
   const submitTask = (task) => {
     setTaskList([...taskList, task]);
     setKey(key + 1);
+    document.getElementById("newTaskInput").value = "";
+    newTask.text = "";
   };
   useEffect(() => {
-    console.log(taskList, key);
-  });
+    console.log(taskList);
+  }, [taskList]);
   return (
     <ul className="list">
       {taskList.map((item, index) => (
-        <ToDoItem task={item} key={index} id={index} handleDelete={handleDelete} />
+        <ToDoItem
+          task={item}
+          key={index}
+          id={index}
+          handleDelete={handleDelete}
+          updateTask={updateTask}
+          handleComplete={handleComplete}
+        />
       ))}
       <div className="addItem">
         <input
+          id="newTaskInput"
           type="text"
           placeholder="Type your task here..."
           onChange={(e) => handleTask(e.target.value)}
