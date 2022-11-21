@@ -4,12 +4,10 @@ import "./ToDoList.css";
 
 export default function ToDoList() {
   const [taskList, setTaskList] = useState([]);
-  const [key, setKey] = useState(0);
   const [task, setTask] = useState({});
   const newTask = {
     text: "",
     id: taskList.length,
-    key: taskList.length,
     completed: false,
   };
   const updateTask = (id) => {
@@ -33,25 +31,22 @@ export default function ToDoList() {
     });
     console.log("UPDATED TASK!!!!", newList);
     setTaskList(newList);
-    
   };
   const handleTask = (str) => {
     newTask.text = str;
     setTask(newTask);
   };
   const handleDelete = (id) => {
-    console.log(id);
     const newList = taskList.filter((task) => task.id !== id);
     newList.map((item, index) => {
       item.id = index;
-      item.key = index;
+      return null;
     });
     console.log("newList!!", newList);
     setTaskList(newList);
   };
   const submitTask = (task) => {
-    setTaskList([...taskList, task]);
-    setKey(key + 1);
+    setTaskList((prevState) => [...prevState, task]);
     document.getElementById("newTaskInput").value = "";
     newTask.text = "";
   };
@@ -59,32 +54,35 @@ export default function ToDoList() {
     console.log(taskList);
   }, [taskList]);
   return (
-    <ul className="list">
-      {taskList.map((item, index) => (
-        <ToDoItem
-          task={item}
-          key={index}
-          id={index}
-          handleDelete={handleDelete}
-          updateTask={updateTask}
-          handleComplete={handleComplete}
-        />
-      ))}
-      <div className="addItem">
-        <input
-          id="newTaskInput"
-          type="text"
-          placeholder="Type your task here..."
-          onChange={(e) => handleTask(e.target.value)}
-        ></input>
-        <button
-          onClick={() => {
-            submitTask(task);
-          }}
-        >
-          Add Task +
-        </button>
-      </div>
-    </ul>
+    <div className="list-wrapper">
+      <h3>List Name</h3>
+
+      <ul className="list">
+        {taskList.map((item, index) => (
+          <ToDoItem
+            task={item}
+            key={index}
+            handleDelete={handleDelete}
+            updateTask={updateTask}
+            handleComplete={handleComplete}
+          />
+        ))}
+        <div className="addItem">
+          <input
+            id="newTaskInput"
+            type="text"
+            placeholder="Type your task here..."
+            onChange={(e) => handleTask(e.target.value)}
+          ></input>
+          <button
+            onClick={() => {
+              submitTask(task);
+            }}
+          >
+            Add Task +
+          </button>
+        </div>
+      </ul>
+    </div>
   );
 }

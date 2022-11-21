@@ -3,6 +3,10 @@
     padding: 1rem;
     margin: .5rem;
 }
+p {
+    color: white;
+    margin-top: 0;
+}
 .complete {
     border: 2px solid lime;
 
