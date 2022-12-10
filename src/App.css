@@ -6,8 +6,32 @@
   height: 100vh;
   text-align: center;
 }
+h1 {
+  color: white;
+}
 .Lists {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.newListButton{
+  all: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: 3px dashed white;
+  color: white;
+  font-size: 2rem;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+.newListButton:hover{
+  transition: all .5s;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid white;
+  font-size: 2.25rem;
 }
