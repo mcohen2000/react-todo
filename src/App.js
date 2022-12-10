@@ -1,15 +1,22 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import ToDoList from "./components/ToDoList/ToDoList";
 
-
 function App() {
+  const [lists, setLists] = useState([{name:"List Name", tasks:[]}]);
   return (
     <div className="App">
+      <h1>ToDo List App</h1>
       <div className="Lists">
-      <ToDoList></ToDoList>
-      {/* <ToDoList></ToDoList> */}
-
+        {lists.map((item, index) => (
+          <ToDoList key={index} uid={index} list={item} lists={lists} setLists={setLists}/>
+        ))}
+        <button
+          className="newListButton"
+          onClick={() => setLists((prevState) => [...prevState, {name:"List Name", tasks:[]}])}
+        >
+          +
+        </button>
       </div>
     </div>
   );
