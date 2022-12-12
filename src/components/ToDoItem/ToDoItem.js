@@ -1,5 +1,6 @@
 import React from "react";
 import "./ToDoItem.css";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 export default function ToDoItem({
   task,
@@ -11,12 +12,12 @@ export default function ToDoItem({
 }) {
   return (
     <li className={`listItem task${task.id} ${task.completed ? "complete" : ""}`}>
-      {editing ? <input defaultValue={task.text} onBlur={(e) => {
+      {editing ? <input className="editingTaskInput" defaultValue={task.text} onBlur={(e) => {
         updateText(task.id, e.target.value)
         setEditing(false)
         }}></input> : <p onClick={() => setEditing(true)}>{task.text}</p>}
-      <button onClick={() => handleComplete(task.id)}>Completed</button>
-      <button onClick={() => handleDelete(task.id)}>Delete</button>
+      <button className="completeItemButton" onClick={() => handleComplete(task.id)}><FaCheckCircle className="completeIcon"/></button>
+      <button className="deleteItemButton" onClick={() => handleDelete(task.id)}><FaTimesCircle className="deleteIcon"/></button>
     </li>
   );
 }
