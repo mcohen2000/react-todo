@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import "./ToDoList.css";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function ToDoList({ uid, list, lists, setLists }) {
   const [task, setTask] = useState({});
@@ -24,7 +25,6 @@ export default function ToDoList({ uid, list, lists, setLists }) {
       }
     });
     updateLists(list.name, newList);
-    document.getElementById("newTaskInput").value = "";
   };
   const handleComplete = (id) => {
     const newList = [...list.tasks];
@@ -52,12 +52,10 @@ export default function ToDoList({ uid, list, lists, setLists }) {
   const submitTask = (task) => {
     const newList = [...list.tasks, task];
     updateLists(list.name, newList);
-    document.getElementById("newTaskInput").value = "";
     newTask.text = "";
   };
   const handleListName = (text) => {
     updateLists(text, list.tasks);
-    document.getElementById("newTaskInput").value = "";
     newTask.text = "";
   };
 
@@ -68,19 +66,19 @@ export default function ToDoList({ uid, list, lists, setLists }) {
     <div className="list-wrapper">
       <h3>
         <input
-          id="listName"
+          className="listName"
           type="text"
           value={list.name}
           onChange={(e) => handleListName(e.target.value)}
         ></input>
-        <button
+        <button className="deleteListButton"
           onClick={() => {
             const newLists = [...lists];
             newLists.splice(uid, 1);
             setLists(newLists);
           }}
         >
-          X
+          <FaTrashAlt className="trashIcon"/>
         </button>
       </h3>
 
@@ -97,19 +95,20 @@ export default function ToDoList({ uid, list, lists, setLists }) {
           />
         ))}
         <form
-          className="addItem"
+          className="addItemForm"
           onSubmit={(e) => {
             e.preventDefault();
             submitTask(task);
+            e.target.reset();
           }}
         >
           <input
-            id="newTaskInput"
+            className="newTaskInput"
             type="text"
             placeholder="Type your task here..."
             onChange={(e) => handleTask(e.target.value)}
           ></input>
-          <button type="submit">Add Task +</button>
+          <button type="submit" className="addItemButton">Add Task +</button>
         </form>
       </ul>
     </div>
