@@ -4,20 +4,23 @@
     margin: .5rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-items: flex-start;
 }
 .editingTaskInput{
     margin: .5rem;
+    margin-right: 0;
     width: 70%;
+    height: auto;
+    /* max-height: 10rem; */
 }
 p {
     text-align: left;
-    width: 75%;
-    margin: 0;
-    margin-left: .5rem;
+    width: 70%;
+    margin: 0.5rem;
     color: white;
-    margin-top: 0;
     cursor: pointer;
+    word-wrap: break-word;
 }
 .complete {
     border: 2px solid lime;
@@ -30,9 +33,11 @@ p {
 }
 .completeItemButton{
     all: unset;
+    cursor: pointer;
+    justify-self: flex-end;
     color: white;
     margin: none;
-    margin-left: .25rem;
+    margin-left: 1rem;
     transition: all .5s;
 }
 .completeIcon{
@@ -45,9 +50,11 @@ p {
 }
 .deleteItemButton{
     all: unset;
+    justify-self: flex-end;
+    cursor: pointer;
     color: white;
     margin: none;
-    margin-left: .25rem;
+    margin-left: .5rem;
     transition: all .5s;
 }
 .deleteIcon{
