@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import "./ToDoList.css";
@@ -51,9 +51,6 @@ export default function ToDoList({ index, list, lists, setLists }) {
     updateLists(text, list.tasks);
   };
 
-  // useEffect(() => {
-  //   console.log(list);
-  // }, [list]);
   return (
     <div className="list-wrapper">
       <h3>
