@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import "./ToDoList.css";
 import { FaTrashAlt } from "react-icons/fa";
 
-export default function ToDoList({ uid, list, lists, setLists }) {
-  const [task, setTask] = useState({});
+export default function ToDoList({ index, list, lists, setLists }) {
   const [editing, setEditing] = useState(-1);
   const newTask = {
     text: "",
-    id: list.tasks.length,
+    id: uuidv4(),
     completed: false,
   };
   const updateLists = (listName, listObj) => {
     const newLists = [...lists];
-    newLists[uid] = { name: listName, tasks: listObj };
-
+    newLists[index] = { name: listName, tasks: listObj };
     setLists(newLists);
   };
   const updateText = (id, text) => {
@@ -37,31 +36,24 @@ export default function ToDoList({ uid, list, lists, setLists }) {
   };
   const handleTask = (str) => {
     newTask.text = str;
-    setTask(newTask);
   };
 
   const handleDelete = (id) => {
     // make a copy of state without deleted item
     const newList = list.tasks.filter((task) => task.id !== id);
-    //update ids
-    newList.forEach((item, index) => {
-      item.id = index;
-    });
     updateLists(list.name, newList);
   };
   const submitTask = (task) => {
     const newList = [...list.tasks, task];
     updateLists(list.name, newList);
-    newTask.text = "";
   };
   const handleListName = (text) => {
     updateLists(text, list.tasks);
-    newTask.text = "";
   };
 
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
+  // useEffect(() => {
+  //   console.log(list);
+  // }, [list]);
   return (
     <div className="list-wrapper">
       <h3>
@@ -75,7 +67,7 @@ export default function ToDoList({ uid, list, lists, setLists }) {
           className="deleteListButton"
           onClick={() => {
             const newLists = [...lists];
-            newLists.splice(uid, 1);
+            newLists.splice(index, 1);
             setLists(newLists);
           }}
         >
@@ -87,7 +79,7 @@ export default function ToDoList({ uid, list, lists, setLists }) {
         className="addItemForm"
         onSubmit={(e) => {
           e.preventDefault();
-          submitTask(task);
+          submitTask(newTask);
           e.target.reset();
         }}
       >

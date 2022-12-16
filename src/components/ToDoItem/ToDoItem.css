@@ -36,8 +36,7 @@ p {
     cursor: pointer;
     justify-self: flex-end;
     color: white;
-    margin: none;
-    margin-left: 1rem;
+    margin: 0 0 0 1rem;
     transition: all .5s;
 }
 .completeIcon{
@@ -53,8 +52,7 @@ p {
     justify-self: flex-end;
     cursor: pointer;
     color: white;
-    margin: none;
-    margin-left: .5rem;
+    margin: 0 0 0 0.5rem;
     transition: all .5s;
 }
 .deleteIcon{
