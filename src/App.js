@@ -9,7 +9,7 @@ function App() {
       <h1>ToDo List App</h1>
       <div className="Lists">
         {lists.map((item, index) => (
-          <ToDoList key={index} uid={index} list={item} lists={lists} setLists={setLists}/>
+          <ToDoList key={index} index={index} list={item} lists={lists} setLists={setLists}/>
         ))}
         <button
           className="newListButton"
